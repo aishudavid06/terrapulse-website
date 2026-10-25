@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerraPulse — Environmental Awareness & Action Hub (All-in-One)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#0F382A',
+              hover: '#0A261C',
+              light: '#E7F2EC',
+            },
+            accent: {
+              DEFAULT: '#10B981',
+              emerald: '#059669',
+              mint: '#34D399',
+            },
+            surface: {
+              DEFAULT: '#F9F9FF',
+              alt: '#F0F3FF',
+              card: '#FFFFFF',
+              dark: '#0B1F17'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F9F9FF;
+      color: #1E293B;
+    }
+    .page-view {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+    }
+    .page-view.active {
+      display: block;
+      opacity: 1;
+    }
+    .nav-link.active {
+      background-color: #0F382A;
+      color: #ffffff !important;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#F9F9FF] text-slate-800 antialiased selection:bg-emerald-200">
+
+  <!-- Top Global Alert Bar -->
+  <div class="bg-[#0A261C] text-emerald-300 text-xs py-2 px-4 border-b border-emerald-950/40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="font-semibold text-white">COP30 Climate Action Week Live:</span>
+        <span class="text-emerald-200">41,280+ Trees Planted This Month • Global Peer Review V4.2</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs">
+        <a href="#landing" onclick="switchPage('landing')" class="hover:underline flex items-center gap-1 text-emerald-300 font-medium">
+          Explore Dashboard &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Persistent Master App Navigation Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo / Identity -->
+        <a href="#landing" onclick="switchPage('landing')" class="flex items-center gap-3 cursor-pointer group">
+          <div class="w-11 h-11 rounded-xl bg-[#0F382A] flex items-center justify-center text-emerald-400 shadow-md group-hover:bg-[#0A261C] transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="text-xl font-extrabold tracking-tight text-[#0F382A] flex items-center gap-1.5">
+              TerraPulse
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">CSI3029</span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium">Eco-Intelligence & Action Network</p>
+          </div>
+        </a>
+
+        <!-- Main Desktop Navigation Tabs -->
+        <nav class="hidden md:flex items-center space-x-1.5 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200">
+          <button onclick="switchPage('landing')" id="nav-landing" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 transition-all flex items-center gap-2 active">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Mission & Impact
+          </button>
+          <button onclick="switchPage('campaigns')" id="nav-campaigns" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+            Campaigns & Action
+          </button>
+          <button onclick="switchPage('calculator')" id="nav-calculator" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            Carbon Calculator
+          </button>
+          <button onclick="switchPage('resources')" id="nav-resources" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Resource Hub & Community
+          </button>
+        </nav>
+
+        <!-- Right Side Live Telemetry Indicator & Primary Action -->
+        <div class="flex items-center gap-3">
+          <div class="hidden xl:flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-800">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            421.8 ppm CO₂ <span class="text-slate-400 font-normal">| Live Mo.</span>
+          </div>
+          <button onclick="switchPage('campaigns')" class="bg-[#0F382A] hover:bg-[#0A261C] text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+            <span>Take Action Now</span>
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Submenu Navigation Bar -->
+      <div class="md:hidden flex overflow-x-auto py-2.5 gap-2 border-t border-slate-100 no-scrollbar">
+        <button onclick="switchPage('landing')" id="nav-mobile-landing" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0F382A] text-white whitespace-nowrap">Mission</button>
+        <button onclick="switchPage('campaigns')" id="nav-mobile-campaigns" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 whitespace-nowrap">Campaigns</button>
+        <button onclick="switchPage('calculator')" id="nav-mobile-calculator" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 whitespace-nowrap">Calculator</button>
+        <button onclick="switchPage('resources')" id="nav-mobile-resources" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 whitespace-nowrap">Resources</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 1: LANDING & MISSION VIEW                         -->
+  <!-- ======================================================== -->
+  <main id="view-landing" class="page-view active flex-1">
+    
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-[#F9F9FF] py-16 lg:py-20 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold tracking-wide">
+              <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              DECENTRALIZED CLIMATE COMMONS • LIVE TELEMETRY
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F382A] tracking-tight leading-[1.12]">
+              Empowering Citizen Action for a <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">Resilient Planet</span>
+            </h1>
+            
+            <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Uniting over 250,000+ verified advocates worldwide with real-time planetary metrics, open-source grassroots toolkits, and direct civic policy interventions that arrest ecological degradation.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <button onclick="switchPage('calculator')" class="bg-[#0F382A] hover:bg-[#0A261C] text-white px-7 py-3.5 rounded-xl font-bold text-base shadow-md hover:shadow-xl transition-all flex items-center gap-2">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Calculate Your Footprint
+              </button>
+              <button onclick="switchPage('campaigns')" class="bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-300 px-7 py-3.5 rounded-xl font-bold text-base transition-all flex items-center gap-2">
+                Explore Active Campaigns
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </button>
+            </div>
+
+            <!-- Verification Ribbon -->
+            <div class="flex items-center gap-3 pt-4 text-xs font-semibold text-slate-500 border-t border-slate-200">
+              <span class="flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
+                ✓ 100% Peer-Reviewed IPCC AR6 Data
+              </span>
+              <span>•</span>
+              <span class="flex items-center gap-1 text-slate-600">
+                🔒 Cryptographically Verified Ledger
+              </span>
+            </div>
+          </div>
+
+          <!-- Hero Telemetry Graphic / Stat Display -->
+          <div class="lg:col-span-5">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200/80 relative">
+              <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Station Node Alpha-7</span>
+                  <h3 class="text-lg font-extrabold text-[#0F382A]">Pacific Biosphere Canopy Station</h3>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">ONLINE</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 py-6 border-b border-slate-100">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60">
+                  <div class="text-xs text-slate-500 font-medium">CO₂ Sequestration</div>
+                  <div class="text-2xl font-black text-[#0F382A] mt-1">3.4 t/day</div>
+                  <div class="text-[11px] text-emerald-600 font-bold mt-0.5">↑ +14% vs baseline</div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60">
+                  <div class="text-xs text-slate-500 font-medium">Soil Biomass Purity</div>
+                  <div class="text-2xl font-black text-emerald-700 mt-1">94.2%</div>
+                  <div class="text-[11px] text-slate-500 font-bold mt-0.5">Pristine Tier-1</div>
+                </div>
+              </div>
+
+              <div class="pt-6 space-y-3">
+                <div class="flex justify-between text-xs font-semibold">
+                  <span class="text-slate-600">Copernicus Satellite Feed Sync</span>
+                  <span class="text-emerald-700">Latency: 1.4s</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-emerald-500 h-full rounded-full w-[88%]"></div>
+                </div>
+                <p class="text-xs text-slate-500">Autonomous sensor grid transmitting atmospheric density every 300 seconds.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 4 Vital Stat Cards Banner -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-14">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+              <span>Atmospheric CO₂</span>
+              <span class="text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full">+2.4 ppm yr</span>
+            </div>
+            <div class="text-3xl font-extrabold text-[#0F382A] mt-3">421.8 <span class="text-sm font-semibold text-slate-400">ppm</span></div>
+            <p class="text-xs text-slate-500 mt-1">Global baseline at Mauna Loa Obs.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+              <span>CO₂ Mitigated</span>
+              <span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">✓ Verified</span>
+            </div>
+            <div class="text-3xl font-extrabold text-[#0F382A] mt-3">1.42M <span class="text-sm font-semibold text-slate-400">Tons</span></div>
+            <p class="text-xs text-slate-500 mt-1">Audited by environmental scientists</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+              <span>Rewilding Hubs</span>
+              <span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">+32 this mo</span>
+            </div>
+            <div class="text-3xl font-extrabold text-[#0F382A] mt-3">380+ <span class="text-sm font-semibold text-slate-400">Towns</span></div>
+            <p class="text-xs text-slate-500 mt-1">Community ecological sanctuaries</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+              <span>Capital Efficiency</span>
+              <span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Zero-Leak</span>
+            </div>
+            <div class="text-3xl font-extrabold text-[#0F382A] mt-3">98.2% <span class="text-sm font-semibold text-slate-400">Direct</span></div>
+            <p class="text-xs text-slate-500 mt-1">Directly disbursed to soil & ocean</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Global Biophysical Vital Signs -->
+    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Planetary Biophysical Telemetry</span>
+          <h2 class="text-3xl font-extrabold text-[#0F382A] mt-1">Global Climate Vital Signs</h2>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 bg-white border border-slate-200 px-3 py-1.5 rounded-xl">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Realtime sync with NASA JPL & NOAA datasets
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Cryosphere Metric -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-slate-400 uppercase">Cryosphere Metric</span>
+              <h3 class="text-lg font-bold text-slate-800 mt-0.5">Arctic Sea Ice Extent</h3>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">❄️</div>
+          </div>
+          <div class="text-3xl font-black text-[#0F382A] mt-4">14.12M <span class="text-base font-normal text-slate-500">sq km</span></div>
+          <div class="mt-4 h-16 bg-slate-50 rounded-xl flex items-end p-2 gap-1 border border-slate-100">
+            <div class="w-1/6 bg-slate-300 h-[80%] rounded-sm"></div>
+            <div class="w-1/6 bg-slate-300 h-[75%] rounded-sm"></div>
+            <div class="w-1/6 bg-slate-400 h-[68%] rounded-sm"></div>
+            <div class="w-1/6 bg-blue-300 h-[60%] rounded-sm"></div>
+            <div class="w-1/6 bg-blue-400 h-[52%] rounded-sm"></div>
+            <div class="w-1/6 bg-blue-600 h-[45%] rounded-sm"></div>
+          </div>
+          <div class="flex justify-between items-center text-xs mt-3 text-slate-500">
+            <span>Deviation vs 1981-2010</span>
+            <span class="text-rose-600 font-bold">-1.24M sq km</span>
+          </div>
+        </div>
+
+        <!-- Oceanic Absorption -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-slate-400 uppercase">Oceanic Absorption</span>
+              <h3 class="text-lg font-bold text-slate-800 mt-0.5">Ocean Heat Index (0-2000m)</h3>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">🌊</div>
+          </div>
+          <div class="text-3xl font-black text-rose-600 mt-4">345.2 <span class="text-base font-normal text-slate-500">ZettaJoules</span></div>
+          <div class="mt-4 h-16 bg-slate-50 rounded-xl flex items-end p-2 gap-1 border border-slate-100">
+            <div class="w-1/6 bg-amber-200 h-[30%] rounded-sm"></div>
+            <div class="w-1/6 bg-amber-300 h-[45%] rounded-sm"></div>
+            <div class="w-1/6 bg-orange-300 h-[58%] rounded-sm"></div>
+            <div class="w-1/6 bg-orange-400 h-[70%] rounded-sm"></div>
+            <div class="w-1/6 bg-rose-400 h-[85%] rounded-sm"></div>
+            <div class="w-1/6 bg-rose-600 h-[98%] rounded-sm"></div>
+          </div>
+          <div class="flex justify-between items-center text-xs mt-3 text-slate-500">
+            <span>Surface Thermal Excess</span>
+            <span class="text-rose-600 font-bold">+0.88 °C Mean</span>
+          </div>
+        </div>
+
+        <!-- Clean Transition -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-slate-400 uppercase">Clean Transition</span>
+              <h3 class="text-lg font-bold text-slate-800 mt-0.5">Renewable Grid Penetration</h3>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">⚡</div>
+          </div>
+          <div class="text-3xl font-black text-emerald-600 mt-4">34.8% <span class="text-base font-normal text-slate-500">Global Avg</span></div>
+          <div class="mt-4 space-y-2">
+            <div class="flex justify-between text-xs text-slate-600 font-semibold">
+              <span>Solar: 14.2%</span>
+              <span>Wind: 13.6%</span>
+              <span>Hydro: 7.0%</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden flex">
+              <div class="bg-amber-400 h-full w-[41%]"></div>
+              <div class="bg-sky-400 h-full w-[39%]"></div>
+              <div class="bg-emerald-500 h-full w-[20%]"></div>
+            </div>
+          </div>
+          <div class="flex justify-between items-center text-xs mt-3 text-slate-500">
+            <span>2030 Target Pathway</span>
+            <span class="text-emerald-700 font-bold">60.0% Required</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Priority Environmental Initiatives -->
+    <section class="py-16 bg-slate-100/70 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Targeted Interventions</span>
+          <h2 class="text-3xl font-extrabold text-[#0F382A] mt-1">Priority Environmental Initiatives</h2>
+          <p class="text-slate-600 text-sm mt-2">Engineered for maximum carbon displacement and biodiversity regeneration, tracked through tamper-proof ecological ledgers.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+            <div class="h-48 bg-[#18392B] relative flex items-center justify-center text-white p-6">
+              <span class="absolute top-4 left-4 text-xs font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">🌲 Terrestrial Sink</span>
+              <div class="text-center">
+                <div class="text-4xl mb-2">🌿</div>
+                <div class="font-bold text-emerald-300">Forest Canopy Restore</div>
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-[#0F382A]">Reforest & Rewild Corridors</h3>
+                <p class="text-sm text-slate-600 mt-2">Creating contiguous wildlife pathways across fragmented boreal and subtropical ecosystems to preserve genetic diversity.</p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-600 font-semibold">
+                  <span>Progress to 5M Trees</span>
+                  <span class="text-emerald-700 font-bold">68% Complete</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-1.5">
+                  <div class="bg-emerald-600 h-full w-[68%]"></div>
+                </div>
+              </div>
+              <button onclick="switchPage('campaigns')" class="mt-6 w-full py-2.5 rounded-xl border-2 border-slate-200 text-slate-800 font-bold text-xs hover:border-[#0F382A] hover:bg-[#0F382A] hover:text-white transition-all">
+                Join Tree Planting Surge &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+            <div class="h-48 bg-[#0D384D] relative flex items-center justify-center text-white p-6">
+              <span class="absolute top-4 left-4 text-xs font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">🌊 Marine Protection</span>
+              <div class="text-center">
+                <div class="text-4xl mb-2">🐢</div>
+                <div class="font-bold text-sky-300">Ocean Plastic Interception</div>
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-[#0F382A]">Ocean Plastics Interception</h3>
+                <p class="text-sm text-slate-600 mt-2">Autonomous rivermouth collectors and civic shoreline dive crews blocking synthetic polymers from entering pelagic food webs.</p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-600 font-semibold">
+                  <span>Tonnage Harvested</span>
+                  <span class="text-sky-700 font-bold">2,400 Metric Tons</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-1.5">
+                  <div class="bg-sky-600 h-full w-[80%]"></div>
+                </div>
+              </div>
+              <button onclick="switchPage('campaigns')" class="mt-6 w-full py-2.5 rounded-xl border-2 border-slate-200 text-slate-800 font-bold text-xs hover:border-[#0F382A] hover:bg-[#0F382A] hover:text-white transition-all">
+                Sponsor Interceptor Fleet &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+            <div class="h-48 bg-[#2A3F1F] relative flex items-center justify-center text-white p-6">
+              <span class="absolute top-4 left-4 text-xs font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">⚡ Decentralized Power</span>
+              <div class="text-center">
+                <div class="text-4xl mb-2">☀️</div>
+                <div class="font-bold text-amber-300">Clean Energy Microgrids</div>
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-[#0F382A]">Clean Energy Microgrids</h3>
+                <p class="text-sm text-slate-600 mt-2">Deploying off-grid solar and battery resilience systems directly replacing heavy diesel generators in vulnerable frontline towns.</p>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-600 font-semibold">
+                  <span>Households Powered</span>
+                  <span class="text-amber-700 font-bold">12,000 Off-Grid Homes</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-1.5">
+                  <div class="bg-amber-500 h-full w-[60%]"></div>
+                </div>
+              </div>
+              <button onclick="switchPage('campaigns')" class="mt-6 w-full py-2.5 rounded-xl border-2 border-slate-200 text-slate-800 font-bold text-xs hover:border-[#0F382A] hover:bg-[#0F382A] hover:text-white transition-all">
+                Fund a Microgrid Battery &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Frontline Testimonial Banner -->
+    <section class="py-16 bg-[#0F382A] text-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-emerald-800/60 border-4 border-emerald-400/40 flex-shrink-0 flex items-center justify-center text-4xl shadow-2xl">
+            👩‍🔬
+          </div>
+          <div class="space-y-4 text-center md:text-left">
+            <p class="text-xl sm:text-2xl font-medium leading-relaxed text-emerald-100">
+              "Climate restoration isn't a speculative corporate offset — it happens shovelful by shovelful, sensor by sensor. TerraPulse equips grassroots defenders with the empirical veracity to challenge apathy and build tangible biotic abundance."
+            </p>
+            <div>
+              <div class="font-extrabold text-white text-lg">Dr. Maya Lin, Ph.D.</div>
+              <div class="text-emerald-400 text-sm">Climate Resilience Senior Fellow • Global Agroecology Initiative</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 2: CAMPAIGNS & ACTION CENTER                      -->
+  <!-- ======================================================== -->
+  <main id="view-campaigns" class="page-view flex-1">
+    
+    <div class="bg-white border-b border-slate-200 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Real-time Civic Action Network • Target Cycle 2026
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F382A] mt-2">Active Campaigns & Grassroots Actions</h1>
+            <p class="text-slate-600 text-sm mt-1">Sign urgent petitions, organize or attend local cleanups, and track legislative breakthroughs in real-time.</p>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-bold text-slate-500">
+            <span class="text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-lg">🛡️ 3,490,112 Petitions Delivered</span>
+          </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-2 mt-8 pt-6 border-t border-slate-100">
+          <button class="px-4 py-2 rounded-xl text-xs font-bold bg-[#0F382A] text-white">All Campaigns (18)</button>
+          <button class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Legislative Petitions (6)</button>
+          <button class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Cleanups & Field Work (8)</button>
+          <button class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Corporate Accountability (4)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Campaign Layout: Urgent Petition + Sign Form -->
+    <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Urgent Petition Feature -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div class="flex items-center justify-between">
+            <span class="bg-rose-100 text-rose-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+              🚨 Emergency Appeal • 48 Hours Left
+            </span>
+            <span class="text-xs text-slate-400 font-medium">Federal Public Lands Docket #2026-AK-09</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F382A] leading-snug">
+            Stop Ancient Old-Growth Logging in the Tongass National Forest
+          </h2>
+
+          <p class="text-slate-600 text-sm leading-relaxed">
+            The Tongass is Earth's largest remaining temperate rainforest, functioning as a colossal carbon sink that absorbs 8% of all lower-48 carbon emissions. A newly revived federal timber lease threatens 45,000 acres of 800-year-old Sitka spruces and Western red cedars. We are delivering this emergency civic petition straight to the Under Secretary for Natural Resources before the public comment window seals shut.
+          </p>
+
+          <div class="bg-slate-900 rounded-2xl h-56 relative overflow-hidden flex items-end p-6 text-white">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
+            <div class="relative z-20 flex justify-between w-full items-end">
+              <div>
+                <span class="text-xs font-semibold text-emerald-400">Tongass Ecosystem Reserve, Alaska</span>
+                <div class="text-sm font-bold">45,000 Acres at Stake</div>
+              </div>
+              <span class="bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">IPCC Critical Habitat</span>
+            </div>
+          </div>
+
+          <!-- Signature Progress Bar -->
+          <div class="space-y-2 pt-2">
+            <div class="flex justify-between items-baseline">
+              <span class="text-3xl font-black text-[#0F382A]">184,320</span>
+              <span class="text-xs font-bold text-slate-500">Goal: 200,000 signatures</span>
+            </div>
+            <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden">
+              <div id="petition-progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500" style="width: 92%;"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-500 font-medium">
+              <span class="text-emerald-700 font-bold">✓ 92% Reached — Only 15,680 Needed</span>
+              <span>Threshold closes Oct 24, 2026</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 text-xs text-slate-600 space-y-1">
+            <div class="font-bold text-slate-800">Scientific Co-Signers:</div>
+            <div>Pacific Biome Alliance • Indigenous Land Sovereignty Council • Earth Law Collaborative</div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Sign Form -->
+        <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border-2 border-emerald-800/20 shadow-lg space-y-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-[#0F382A]">Add Your Signature</h3>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">🛡️ Secure & Verified</span>
+          </div>
+
+          <form id="petition-form" onsubmit="handlePetitionSubmit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Full Legal Name</label>
+              <input type="text" id="signer-name" required placeholder="e.g. Dr. Alex Morgan" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#0F382A] focus:outline-none">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+              <input type="email" id="signer-email" required placeholder="alex@earth-action.org" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#0F382A] focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Postal Code</label>
+                <input type="text" required placeholder="98101" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#0F382A] focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Country</label>
+                <select class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#0F382A] focus:outline-none bg-white">
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>United Kingdom</option>
+                  <option>Australia</option>
+                  <option>Germany</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Why this matters to you (Optional)</label>
+              <textarea rows="2" placeholder="Ancient trees can never be replaced by sapling monocultures..." class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#0F382A] focus:outline-none"></textarea>
+            </div>
+
+            <div class="flex items-start gap-2 pt-1">
+              <input type="checkbox" id="signer-optin" checked class="mt-1 rounded text-emerald-600 focus:ring-emerald-500">
+              <label for="signer-optin" class="text-xs text-slate-600 leading-snug">
+                Deliver my signed statement and verified postal address directly to congressional representatives and forestry regulatory leaders.
+              </label>
+            </div>
+
+            <button type="submit" class="w-full bg-[#0F382A] hover:bg-[#0A261C] text-white py-3.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+              <span>Sign Petition Now (Instant Delivery)</span>
+            </button>
+          </form>
+
+          <div id="petition-success" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-xs text-center font-semibold animate-pulse">
+            🎉 Thank you for signing! Your verification receipt #TP-89241 has been dispatched to Congressional Docket.
+          </div>
+
+          <!-- Live Civic Stream -->
+          <div class="pt-4 border-t border-slate-100 space-y-3">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-400">
+              <span>LIVE CIVIC STREAM</span>
+              <span class="text-emerald-600 flex items-center gap-1">● Live</span>
+            </div>
+            <div class="space-y-2 text-xs text-slate-600" id="signatures-ticker">
+              <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                <span class="font-medium text-slate-800">Sarah K. from Seattle, WA</span>
+                <span class="text-slate-400 text-[10px]">2m ago</span>
+              </div>
+              <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                <span class="font-medium text-slate-800">Liam M. from Vancouver, BC</span>
+                <span class="text-slate-400 text-[10px]">5m ago</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="font-medium text-slate-800">Devon A. from Juneau, AK</span>
+                <span class="text-slate-400 text-[10px]">8m ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Upcoming Field Actions & Cleanups Grid -->
+    <section class="py-12 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Direct Physical Action</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F382A]">Upcoming Field Actions & Cleanups</h2>
+            <p class="text-slate-600 text-sm mt-1">Join boots-on-the-ground ecological interventions organized with provided gear and scientific monitoring equipment.</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700">Grid View</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Event 1 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">🌊 Coastal Restoration</span>
+                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full">45 spots left</span>
+              </div>
+              <h3 class="text-lg font-bold text-[#0F382A] mt-4">Pacific Coastline Microplastics Sweep</h3>
+              <div class="text-xs text-slate-500 mt-2 space-y-1">
+                <div class="flex items-center gap-1 font-semibold text-slate-700">📅 Saturday, Oct 18, 2026 • 9:00 AM</div>
+                <div>📍 Half Moon Bay Coastal Trail, CA</div>
+              </div>
+              <p class="text-xs text-slate-600 mt-3">Join our marine biologists to sift microplastics and catalog synthetic debris across 4 miles of intertidal habitat.</p>
+              <div class="mt-4 flex flex-wrap gap-1 text-[11px] font-semibold text-slate-600">
+                <span class="bg-slate-100 px-2 py-0.5 rounded">Equipment Provided</span>
+                <span class="bg-slate-100 px-2 py-0.5 rounded">Transit Accessible</span>
+              </div>
+            </div>
+            <button onclick="registerEvent('Pacific Coastline Microplastics Sweep')" class="mt-6 w-full py-2.5 bg-[#0F382A] text-white rounded-xl font-bold text-xs hover:bg-[#0A261C] transition-colors">
+              Register Volunteer &rarr;
+            </button>
+          </div>
+
+          <!-- Event 2 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">🌿 Rewilding Corridor</span>
+                <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">28 spots left</span>
+              </div>
+              <h3 class="text-lg font-bold text-[#0F382A] mt-4">Urban Biodiversity Native Planting Day</h3>
+              <div class="text-xs text-slate-500 mt-2 space-y-1">
+                <div class="flex items-center gap-1 font-semibold text-slate-700">📅 Sunday, Oct 19, 2026 • 10:00 AM</div>
+                <div>📍 Austin River Basin (Lady Bird Lake), TX</div>
+              </div>
+              <p class="text-xs text-slate-600 mt-3">Plant over 800 native pollinator shrubs and drought-hardy riparian grasses to cool heat islands and curb erosion.</p>
+              <div class="mt-4 flex flex-wrap gap-1 text-[11px] font-semibold text-slate-600">
+                <span class="bg-slate-100 px-2 py-0.5 rounded">Family Friendly</span>
+                <span class="bg-slate-100 px-2 py-0.5 rounded">Saplings Provided</span>
+              </div>
+            </div>
+            <button onclick="registerEvent('Urban Biodiversity Native Planting Day')" class="mt-6 w-full py-2.5 bg-[#0F382A] text-white rounded-xl font-bold text-xs hover:bg-[#0A261C] transition-colors">
+              Join Planting &rarr;
+            </button>
+          </div>
+
+          <!-- Event 3 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">🏔️ Watershed Defense</span>
+                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full">12 spots left</span>
+              </div>
+              <h3 class="text-lg font-bold text-[#0F382A] mt-4">Alpine Watershed Riparian Buffer Restoration</h3>
+              <div class="text-xs text-slate-500 mt-2 space-y-1">
+                <div class="flex items-center gap-1 font-semibold text-slate-700">📅 Saturday, Oct 25, 2026 • 8:30 AM</div>
+                <div>📍 Boulder Creek Canyon, CO</div>
+              </div>
+              <p class="text-xs text-slate-600 mt-3">High impact stream cleanup removing post-runoff sedimentation and installing biodegradable erosion blankets.</p>
+              <div class="mt-4 flex flex-wrap gap-1 text-[11px] font-semibold text-slate-600">
+                <span class="bg-slate-100 px-2 py-0.5 rounded">High Impact</span>
+                <span class="bg-slate-100 px-2 py-0.5 rounded">Waders Provided</span>
+              </div>
+            </div>
+            <button onclick="registerEvent('Alpine Watershed Riparian Buffer Restoration')" class="mt-6 w-full py-2.5 bg-[#0F382A] text-white rounded-xl font-bold text-xs hover:bg-[#0A261C] transition-colors">
+              Join Crew &rarr;
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 3: CARBON & ECO-FOOTPRINT CALCULATOR               -->
+  <!-- ======================================================== -->
+  <main id="view-calculator" class="page-view flex-1">
+    
+    <div class="bg-white border-b border-slate-200 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Methodology: GHG Protocol Scope 1-3 Model
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F382A] mt-2">Personal & Household Carbon Calculator</h1>
+            <p class="text-slate-600 text-sm mt-1">Compute your audited annual CO₂ equivalent, benchmark against the global median, and deploy a scientifically prioritized mitigation blueprint.</p>
+          </div>
+          <div class="flex gap-4">
+            <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-center">
+              <div class="text-[11px] text-slate-500 font-bold uppercase">Global Target</div>
+              <div class="text-lg font-black text-emerald-700">2.5 t/yr</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-center">
+              <div class="text-[11px] text-slate-500 font-bold uppercase">US Median</div>
+              <div class="text-lg font-black text-slate-800">14.7 t/yr</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Calculator Workspace -->
+    <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Granular Inputs -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Category Selector -->
+          <div class="flex overflow-x-auto gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+            <button class="px-4 py-2 bg-white rounded-xl text-xs font-bold text-[#0F382A] shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+              🚗 Transportation
+            </button>
+            <button class="px-4 py-2 hover:bg-white/60 rounded-xl text-xs font-bold text-slate-600 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+              ⚡ Home Energy
+            </button>
+            <button class="px-4 py-2 hover:bg-white/60 rounded-xl text-xs font-bold text-slate-600 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+              🥗 Food & Diet
+            </button>
+            <button class="px-4 py-2 hover:bg-white/60 rounded-xl text-xs font-bold text-slate-600 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+              📦 Goods & Waste
+            </button>
+          </div>
+
+          <!-- Transportation Card -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+              <div>
+                <h3 class="text-lg font-bold text-[#0F382A]">Transportation & Mobility</h3>
+                <p class="text-xs text-slate-500">Daily road commuting profile and long-distance flight habits.</p>
+              </div>
+              <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">Scope 1 & 3</span>
+            </div>
+
+            <!-- Vehicle Type Picker -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-700">Primary Commute Vehicle</label>
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="commute-modes">
+                <button type="button" onclick="setCommuteMode('gas', this)" class="p-3 rounded-xl border border-slate-200 text-center hover:border-emerald-600 transition-all mode-btn active bg-emerald-50 border-emerald-600">
+                  <div class="text-xl">🚗</div>
+                  <div class="text-xs font-bold text-slate-800 mt-1">Gasoline Car</div>
+                  <div class="text-[10px] text-slate-400">~404g/mi</div>
+                </button>
+                <button type="button" onclick="setCommuteMode('hybrid', this)" class="p-3 rounded-xl border border-slate-200 text-center hover:border-emerald-600 transition-all mode-btn">
+                  <div class="text-xl">🚙</div>
+                  <div class="text-xs font-bold text-slate-800 mt-1">Hybrid Car</div>
+                  <div class="text-[10px] text-slate-400">~210g/mi</div>
+                </button>
+                <button type="button" onclick="setCommuteMode('ev', this)" class="p-3 rounded-xl border border-slate-200 text-center hover:border-emerald-600 transition-all mode-btn">
+                  <div class="text-xl">🔌</div>
+                  <div class="text-xs font-bold text-slate-800 mt-1">Full Electric</div>
+                  <div class="text-[10px] text-slate-400">~95g/mi</div>
+                </button>
+                <button type="button" onclick="setCommuteMode('transit', this)" class="p-3 rounded-xl border border-slate-200 text-center hover:border-emerald-600 transition-all mode-btn">
+                  <div class="text-xl">🚌</div>
+                  <div class="text-xs font-bold text-slate-800 mt-1">Public Transit</div>
+                  <div class="text-[10px] text-slate-400">~140g/mi</div>
+                </button>
+                <button type="button" onclick="setCommuteMode('bike', this)" class="p-3 rounded-xl border border-slate-200 text-center hover:border-emerald-600 transition-all mode-btn">
+                  <div class="text-xl">🚲</div>
+                  <div class="text-xs font-bold text-slate-800 mt-1">Bike & Walk</div>
+                  <div class="text-[10px] text-emerald-600 font-bold">Zero CO₂</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Commute Miles Slider -->
+            <div class="space-y-3 pt-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-slate-700">Annual Commute Distance</span>
+                <span id="commute-miles-display" class="font-black text-emerald-800 text-base">8,500 miles/yr</span>
+              </div>
+              <input type="range" id="commute-miles-slider" min="0" max="30000" step="500" value="8500" oninput="calculateFootprint()" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#0F382A]">
+              <div class="flex justify-between text-[11px] text-slate-400 font-medium">
+                <span>0 mi (Telework)</span>
+                <span>12,000 mi (US Average)</span>
+                <span>30,000+ mi</span>
+              </div>
+            </div>
+
+            <!-- Flight Steppers -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <div class="text-xs font-bold text-slate-700">Short-Haul Domestic</div>
+                <div class="text-[11px] text-slate-400">&lt; 3 hrs (~0.25 t CO₂ each)</div>
+                <div class="flex items-center justify-between mt-3">
+                  <button type="button" onclick="changeCounter('short-flights', -1)" class="w-8 h-8 rounded-lg bg-white border border-slate-300 font-bold text-slate-700 hover:bg-slate-100">-</button>
+                  <span id="short-flights" class="font-bold text-lg text-slate-900">2</span>
+                  <button type="button" onclick="changeCounter('short-flights', 1)" class="w-8 h-8 rounded-lg bg-white border border-slate-300 font-bold text-slate-700 hover:bg-slate-100">+</button>
+                </div>
+              </div>
+
+              <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <div class="text-xs font-bold text-slate-700">Long-Haul International</div>
+                <div class="text-[11px] text-slate-400">&gt; 5 hrs (~1.20 t CO₂ each)</div>
+                <div class="flex items-center justify-between mt-3">
+                  <button type="button" onclick="changeCounter('long-flights', -1)" class="w-8 h-8 rounded-lg bg-white border border-slate-300 font-bold text-slate-700 hover:bg-slate-100">-</button>
+                  <span id="long-flights" class="font-bold text-lg text-slate-900">1</span>
+                  <button type="button" onclick="changeCounter('long-flights', 1)" class="w-8 h-8 rounded-lg bg-white border border-slate-300 font-bold text-slate-700 hover:bg-slate-100">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empirical Baseline Note -->
+            <div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/60 text-xs text-slate-600 flex items-start gap-3">
+              <span class="text-base text-emerald-800">🛡️</span>
+              <div>
+                <span class="font-bold text-emerald-950">Empirical Baseline Note:</span>
+                Calculations incorporate life-cycle emissions (LCA) based on IPCC 6th Assessment and EPA eGRID subregion factors. Carbon offsets and grid adjustments are calculated using Gold Standard and Verra-compatible emission reduction methodologies.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right: Sticky Live Scorecard & Actions -->
+        <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-200 shadow-xl space-y-6 lg:sticky lg:top-28">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold tracking-wider uppercase text-slate-400">Estimated Net Footprint</span>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Live
+            </span>
+          </div>
+
+          <div>
+            <div class="flex items-baseline gap-2">
+              <span id="total-footprint" class="text-5xl font-black text-[#0F382A]">10.3</span>
+              <span class="text-lg font-bold text-slate-500">Tons CO₂e</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">per individual annually</p>
+          </div>
+
+          <!-- Benchmark Comparisons -->
+          <div class="space-y-3 pt-2">
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-700">Your Estimated Footprint</span>
+                <span id="footprint-indicator" class="font-bold text-emerald-800">10.3 t</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                <div id="footprint-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 55%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-500 mb-1">
+                <span>US National Median</span>
+                <span>14.7 t</span>
+              </div>
+              <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-slate-400 h-full rounded-full w-[80%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-500 mb-1">
+                <span>Paris 2030 Target Limit</span>
+                <span class="text-emerald-700 font-bold">2.5 t</span>
+              </div>
+              <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-emerald-400 h-full rounded-full w-[17%]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-emerald-50 rounded-xl text-xs text-emerald-900 font-semibold flex items-center gap-2">
+            <span>📉</span>
+            <span id="comparison-text">You are 30% lower than the national average!</span>
+          </div>
+
+          <!-- Breakdown Pie / List -->
+          <div class="pt-4 border-t border-slate-100 space-y-2">
+            <div class="text-xs font-bold text-slate-700">SOURCE BREAKDOWN</div>
+            <div class="flex justify-between text-xs text-slate-600">
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-600"></span> Mobility</span>
+              <span id="breakdown-mobility" class="font-bold">5.1 t (50%)</span>
+            </div>
+            <div class="flex justify-between text-xs text-slate-600">
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-500"></span> Home Utilities</span>
+              <span>2.4 t (23%)</span>
+            </div>
+            <div class="flex justify-between text-xs text-slate-600">
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Food & Diet</span>
+              <span>1.9 t (18%)</span>
+            </div>
+            <div class="flex justify-between text-xs text-slate-600">
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-400"></span> Goods & Waste</span>
+              <span>0.9 t (9%)</span>
+            </div>
+          </div>
+
+          <div class="pt-2 space-y-2">
+            <button onclick="downloadAuditReport()" class="w-full py-3 bg-[#0F382A] text-white rounded-xl font-bold text-xs hover:bg-[#0A261C] transition-colors flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download PDF Audit Summary
+            </button>
+            <button onclick="switchPage('resources')" class="w-full py-3 bg-slate-100 text-slate-700 rounded-xl font-bold text-xs hover:bg-slate-200 transition-colors">
+              View Customized Action Guides &darr;
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Personalized Emission Reduction Blueprint Section -->
+    <section class="py-12 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Dynamic Recommendations</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F382A]">Personalized Emission Reduction Blueprint</h2>
+            <p class="text-slate-600 text-sm mt-1">Ranked algorithmic actions designed to reduce your footprint toward the 2.5 t climate target.</p>
+          </div>
+          <div class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1.5 rounded-xl">
+            Total Potential Reduction: <span class="font-black">-3.1 Tons CO₂/yr</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">💡</span>
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">High Impact</span>
+              </div>
+              <h3 class="text-base font-bold text-[#0F382A] mt-3">Switch to Heat Pump Water Heater</h3>
+              <p class="text-xs text-slate-600 mt-2">Transitioning your hot water production cuts domestic gas consumption and pairs seamlessly with clean grid tariffs.</p>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs">
+                <span class="text-slate-500">CO₂ Cut</span>
+                <span class="text-emerald-700 font-bold">-1.8 t / yr</span>
+              </div>
+              <div class="flex justify-between text-xs mt-1">
+                <span class="text-slate-500">Est. Savings</span>
+                <span class="text-slate-800 font-bold">~$420 / yr</span>
+              </div>
+            </div>
+            <button onclick="switchPage('resources')" class="mt-4 w-full py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors">
+              Explore IRA Rebates & Installers &rarr;
+            </button>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">🚆</span>
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">Quick Shift</span>
+              </div>
+              <h3 class="text-base font-bold text-[#0F382A] mt-3">Replace 1 Domestic Flight with Rail</h3>
+              <p class="text-xs text-slate-600 mt-2">High-speed rail produces up to 90% fewer emissions per passenger kilometer compared to regional turbo-prop flights.</p>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs">
+                <span class="text-slate-500">CO₂ Cut</span>
+                <span class="text-emerald-700 font-bold">-0.9 t / yr</span>
+              </div>
+              <div class="flex justify-between text-xs mt-1">
+                <span class="text-slate-500">Transit Time</span>
+                <span class="text-slate-800 font-bold">+1.5 hrs</span>
+              </div>
+            </div>
+            <button onclick="switchPage('resources')" class="mt-4 w-full py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors">
+              Find Intercity Rail Routes &rarr;
+            </button>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">🌱</span>
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">Habit Mod</span>
+              </div>
+              <h3 class="text-base font-bold text-[#0F382A] mt-3">Add 2 Plant-Based Days Weekly</h3>
+              <p class="text-xs text-slate-600 mt-2">Swapping two weekly beef and dairy meals for wholesome legumes and seasonal greens reduces dietary methane footprints significantly.</p>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs">
+                <span class="text-slate-500">CO₂ Cut</span>
+                <span class="text-emerald-700 font-bold">-0.4 t / yr</span>
+              </div>
+              <div class="flex justify-between text-xs mt-1">
+                <span class="text-slate-500">Grocery Bill</span>
+                <span class="text-slate-800 font-bold">-$310 / yr</span>
+              </div>
+            </div>
+            <button onclick="switchPage('resources')" class="mt-4 w-full py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors">
+              Get Seasonal Recipe Guide &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 4: RESOURCE HUB & COMMUNITY EXCHANGE              -->
+  <!-- ======================================================== -->
+  <main id="view-resources" class="page-view flex-1">
+    
+    <!-- Hero / Search Section -->
+    <div class="bg-white border-b border-slate-200 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto space-y-4">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold">
+            🌱 DECENTRALIZED CLIMATE COMMONS • 100% PEER-REVIEWED
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-[#0F382A] tracking-tight">
+            Climate Knowledge Base & Community Exchange
+          </h1>
+          <p class="text-slate-600 text-base">
+            Peer-reviewed climate guides, open-source activist toolkits, policy briefs, and grassroots discussion forum. Built by practitioners, verified by scientists.
+          </p>
+
+          <!-- Search Bar -->
+          <div class="pt-4 max-w-2xl mx-auto">
+            <div class="relative flex items-center">
+              <input type="text" id="resource-search" placeholder="Search 1,840+ climate blueprints, heat pump datasheets, organizing manuals..." class="w-full pl-5 pr-28 py-3.5 rounded-2xl border-2 border-slate-200 focus:border-[#0F382A] focus:outline-none text-sm shadow-sm">
+              <button onclick="filterResources()" class="absolute right-2 px-5 py-2.5 bg-[#0F382A] text-white rounded-xl text-xs font-bold hover:bg-[#0A261C] transition-colors">
+                Find Knowledge
+              </button>
+            </div>
+            <!-- Quick Topic Pills -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-3 text-xs">
+              <span class="text-slate-400 font-semibold">Trending Topics:</span>
+              <button onclick="setSearch('Heat Pumps')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg">♨️ Home Heat Pumps</button>
+              <button onclick="setSearch('Solar Co-ops')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg">☀️ Local Solar Co-ops</button>
+              <button onclick="setSearch('Zero-Waste')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg">♻️ Zero-Waste Transition</button>
+              <button onclick="setSearch('Policy')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg">🏛️ Municipal Policy Guides</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Downloadable Curated Toolkits Grid -->
+    <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Curated Open Toolkits</span>
+          <h2 class="text-2xl font-extrabold text-[#0F382A]">Featured Action Manuals & Technical Models</h2>
+        </div>
+        <a href="#resources" class="text-xs font-bold text-emerald-800 hover:underline">Explore All 340 Toolkits &rarr;</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <!-- Toolkit 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex justify-between items-start">
+              <span class="text-[11px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded">📄 PDF GUIDE</span>
+              <span class="text-xs font-bold text-slate-400">⬇ 18.2k</span>
+            </div>
+            <h3 class="text-base font-bold text-[#0F382A] mt-3">The 2026 Home Electrification & IRA Rebates Playbook</h3>
+            <p class="text-xs text-slate-500 mt-2">Complete navigational handbook on state heat-pump tax credits, induction incentives, electrical panel upgrades.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex justify-between">
+              <span>64 pages • Rev. Jan 2026</span>
+              <span class="text-emerald-700 font-bold">v4.2 Open</span>
+            </div>
+          </div>
+          <button onclick="triggerDownload('2026 Home Electrification Playbook')" class="mt-4 w-full py-2 bg-[#0F382A] text-white hover:bg-[#0A261C] rounded-xl text-xs font-bold transition-colors">
+            Download PDF
+          </button>
+        </div>
+
+        <!-- Toolkit 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex justify-between items-start">
+              <span class="text-[11px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded">📦 ORGANIZER KIT</span>
+              <span class="text-xs font-bold text-slate-400">⬇ 12.8k</span>
+            </div>
+            <h3 class="text-base font-bold text-[#0F382A] mt-3">Grassroots Climate Coalition Organizer Handbook</h3>
+            <p class="text-xs text-slate-500 mt-2">Nonviolent direct action planning, municipal council permit templates, legal defense prep, de-escalation guides.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex justify-between">
+              <span>92 pages • Field Tested</span>
+              <span class="text-emerald-700 font-bold">Movement Ready</span>
+            </div>
+          </div>
+          <button onclick="triggerDownload('Grassroots Climate Coalition Organizer Handbook')" class="mt-4 w-full py-2 bg-[#0F382A] text-white hover:bg-[#0A261C] rounded-xl text-xs font-bold transition-colors">
+            Download PDF
+          </button>
+        </div>
+
+        <!-- Toolkit 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex justify-between items-start">
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">📊 DYNAMIC MODEL</span>
+              <span class="text-xs font-bold text-slate-400">⬇ 9.4k</span>
+            </div>
+            <h3 class="text-base font-bold text-[#0F382A] mt-3">Municipal Climate Action Plan Scoring Model</h3>
+            <p class="text-xs text-slate-500 mt-2">Pre-calibrated Excel & Google Sheets engine to audit city fiscal allocations, transit decarbonization trajectories.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex justify-between">
+              <span>Macro-Enabled • XLSX</span>
+              <span class="text-emerald-700 font-bold">City Hall Audit</span>
+            </div>
+          </div>
+          <button onclick="triggerDownload('Municipal Climate Action Plan Scoring Model')" class="mt-4 w-full py-2 bg-[#0F382A] text-white hover:bg-[#0A261C] rounded-xl text-xs font-bold transition-colors">
+            Download XLSX
+          </button>
+        </div>
+
+        <!-- Toolkit 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex justify-between items-start">
+              <span class="text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">🎓 DECK & STEM</span>
+              <span class="text-xs font-bold text-slate-400">⬇ 14.1k</span>
+            </div>
+            <h3 class="text-base font-bold text-[#0F382A] mt-3">K-12 Climate Literacy & STEM Curriculum Deck</h3>
+            <p class="text-xs text-slate-500 mt-2">Fully customizable presentation slide decks and hands-on laboratory modules exploring carbon cycle physics.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex justify-between">
+              <span>85 Keynote / PPTX</span>
+              <span class="text-emerald-700 font-bold">Edu Licensed</span>
+            </div>
+          </div>
+          <button onclick="triggerDownload('K-12 Climate Literacy Curriculum Deck')" class="mt-4 w-full py-2 bg-[#0F382A] text-white hover:bg-[#0A261C] rounded-xl text-xs font-bold transition-colors">
+            Download Slides
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Community Exchange & Field Q&A Feed -->
+    <section class="py-12 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Forum Q&A Feed -->
+          <div class="lg:col-span-8 space-y-4">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-2xl font-extrabold text-[#0F382A]">Community Exchange & Field Q&A</h2>
+                <p class="text-xs text-slate-500">Real-world advice, mutual troubleshooting, and localized activism blueprints.</p>
+              </div>
+              <button onclick="openNewDiscussionModal()" class="px-4 py-2 bg-[#0F382A] text-white rounded-xl text-xs font-bold hover:bg-[#0A261C] transition-colors">
+                + Start New Discussion
+              </button>
+            </div>
+
+            <!-- Thread 1 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-start gap-4">
+              <div class="flex flex-col items-center">
+                <button onclick="upvoteThread('thread-1-count')" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 font-bold flex flex-col items-center justify-center transition-colors">
+                  ▲
+                  <span id="thread-1-count" class="text-xs">142</span>
+                </button>
+              </div>
+              <div class="flex-1 space-y-2">
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">#CommunitySolar</span>
+                  <span class="text-slate-400">• Posted 4 hours ago by <strong class="text-slate-700">Marcus Webb</strong> (Portland Hub Lead)</span>
+                </div>
+                <h3 class="text-base font-bold text-[#0F382A] hover:underline cursor-pointer">
+                  Success story: How our neighborhood organized a bulk solar rooftop purchase (saved 35% on install)
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  We grouped 38 households across Southeast Portland into an aggregate bidding group. Here is our exact RFP template, installer vetting scorecard, and how we solved split-incentives for rental properties...
+                </p>
+                <div class="flex items-center gap-4 pt-2 text-xs text-slate-400 font-semibold">
+                  <span>💬 48 replies</span>
+                  <span>🔗 3 Toolkits Attached</span>
+                  <button class="hover:text-emerald-700">Bookmark</button>
+                  <button class="hover:text-emerald-700">Share</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thread 2 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-start gap-4">
+              <div class="flex flex-col items-center">
+                <button onclick="upvoteThread('thread-2-count')" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 font-bold flex flex-col items-center justify-center transition-colors">
+                  ▲
+                  <span id="thread-2-count" class="text-xs">310</span>
+                </button>
+              </div>
+              <div class="flex-1 space-y-2">
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">#CleanHeat</span>
+                  <span class="text-slate-400">• Posted yesterday by <strong class="text-slate-700">Elena Rostova</strong> (Energy Systems Engineer)</span>
+                  <span class="text-[10px] text-teal-700 bg-teal-50 px-1.5 py-0.5 rounded font-bold">✓ Scientist Verified</span>
+                </div>
+                <h3 class="text-base font-bold text-[#0F382A] hover:underline cursor-pointer">
+                  Best cold-climate heat pump performance data for below 0°F winter climates — real test results
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Field telemetry from 14 dual-stage inverter heat pumps monitored in Minneapolis during the recent Arctic vortex event. COP stayed above 2.1 even at -14°F. Full empirical logging attached.
+                </p>
+                <div class="flex items-center gap-4 pt-2 text-xs text-slate-400 font-semibold">
+                  <span>💬 89 replies</span>
+                  <span>📊 Raw Dataset Attached</span>
+                  <button class="hover:text-emerald-700">Bookmark</button>
+                  <button class="hover:text-emerald-700">Share</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thread 3 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-start gap-4">
+              <div class="flex flex-col items-center">
+                <button onclick="upvoteThread('thread-3-count')" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 font-bold flex flex-col items-center justify-center transition-colors">
+                  ▲
+                  <span id="thread-3-count" class="text-xs">64</span>
+                </button>
+              </div>
+              <div class="flex-1 space-y-2">
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">#PolicyAction</span>
+                  <span class="text-slate-400">• Posted 2 days ago by <strong class="text-slate-700">Maya Torres</strong> (Student Coalition)</span>
+                </div>
+                <h3 class="text-base font-bold text-[#0F382A] hover:underline cursor-pointer">
+                  Drafting a resolution for single-use plastic bans at our university senate — feedback wanted!
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  We are presenting next Thursday to the Board of Trustees. Looking for precedent language on dining hall vendor procurement contracts and washable container deposit systems.
+                </p>
+                <div class="flex items-center gap-4 pt-2 text-xs text-slate-400 font-semibold">
+                  <span>💬 27 replies</span>
+                  <span class="text-amber-600 font-bold">Needs Feedback</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right: Forum Stats & Specialized Working Groups -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+              <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Exchange Vital Signs</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <div class="text-2xl font-black text-[#0F382A]">12,419</div>
+                  <div class="text-xs text-slate-500">Active Organizers</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-black text-emerald-700">3,108</div>
+                  <div class="text-xs text-slate-500">Solutions Solved</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-black text-slate-800">48h</div>
+                  <div class="text-xs text-slate-500">Avg. Science Review</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-black text-emerald-600">94%</div>
+                  <div class="text-xs text-slate-500">Positive Civic Action</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
+              <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Specialized Working Groups</h3>
+              <a href="#resources" class="flex justify-between items-center text-xs p-2 rounded-lg hover:bg-slate-50">
+                <span class="font-bold text-slate-800">⚡ Decarbonization Guild</span>
+                <span class="text-slate-400">4.2k</span>
+              </a>
+              <a href="#resources" class="flex justify-between items-center text-xs p-2 rounded-lg hover:bg-slate-50">
+                <span class="font-bold text-slate-800">🌲 Urban Canopy Network</span>
+                <span class="text-slate-400">2.8k</span>
+              </a>
+              <a href="#resources" class="flex justify-between items-center text-xs p-2 rounded-lg hover:bg-slate-50">
+                <span class="font-bold text-slate-800">🏛️ Municipal Lobbying</span>
+                <span class="text-slate-400">1.9k</span>
+              </a>
+              <a href="#resources" class="flex justify-between items-center text-xs p-2 rounded-lg hover:bg-slate-50">
+                <span class="font-bold text-slate-800">🌊 Coastal Defense</span>
+                <span class="text-slate-400">3.5k</span>
+              </a>
+            </div>
+
+            <!-- Call for Scientist Contributors -->
+            <div class="bg-[#0F382A] text-white rounded-2xl p-6 space-y-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase">Peer Contributor Program</span>
+              <h4 class="text-base font-bold">Are you a climate scientist, policy architect, or community organizer?</h4>
+              <p class="text-xs text-emerald-100 leading-relaxed">
+                Submit your open-access white papers, organizing checklists, or energy calculators. Our science review board publishes verified models within 48 hours.
+              </p>
+              <button onclick="alert('Submission portal opened! Contact scientific-review@terrapulse.eco')" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold rounded-xl text-xs transition-colors">
+                Submit Open Resource
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- Global Footer -->
+  <footer class="bg-white border-t border-slate-200 py-14 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-slate-100">
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-[#0F382A] flex items-center justify-center text-emerald-400 font-bold text-sm">🌱</div>
+            <span class="font-extrabold text-lg text-[#0F382A]">TerraPulse</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Planetary intelligence engine accelerating community-driven climate restorations and transparent civic ecological projects.
+          </p>
+          <div class="inline-flex items-center gap-2 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">
+            🛡️ Gold Seal of Transparency 2026
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Initiatives & Science</h4>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li><a href="#landing" onclick="switchPage('landing')" class="hover:text-emerald-700">Global Carbon Tracker</a></li>
+            <li><a href="#landing" onclick="switchPage('landing')" class="hover:text-emerald-700">Biodiversity Corridors</a></li>
+            <li><a href="#calculator" onclick="switchPage('calculator')" class="hover:text-emerald-700">Renewable Transition Map</a></li>
+            <li><a href="#campaigns" onclick="switchPage('campaigns')" class="hover:text-emerald-700">Youth Climate Corps</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Community & Action</h4>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li><a href="#campaigns" onclick="switchPage('campaigns')" class="hover:text-emerald-700">Local Hubs Directory</a></li>
+            <li><a href="#campaigns" onclick="switchPage('campaigns')" class="hover:text-emerald-700">Civic Petition Tracker</a></li>
+            <li><a href="#resources" onclick="switchPage('resources')" class="hover:text-emerald-700">Volunteer Network</a></li>
+            <li><a href="#resources" onclick="switchPage('resources')" class="hover:text-emerald-700">Open Environmental API</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Stay Informed</h4>
+          <p class="text-xs text-slate-500 mb-3">Receive our scientifically vetted weekly climate brief and local mobilization alerts.</p>
+          <form onsubmit="handleNewsletter(event)" class="space-y-2">
+            <input type="email" required placeholder="Enter your work email" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#0F382A] focus:outline-none">
+            <button type="submit" class="w-full py-2 bg-[#0F382A] text-white rounded-xl text-xs font-bold hover:bg-[#0A261C] transition-colors">Subscribe</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div>
+          © 2026 TerraPulse Global Initiative. CSI3029 Front End Design & Testing Project (Dr. V. Arulkumar).
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:underline">Privacy Policy</a>
+          <a href="#" class="hover:underline">Open Data License</a>
+          <a href="#" class="hover:underline">Transparency Audit</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT: SPA ROUTING & INTERACTIVE LOGIC               -->
+  <!-- ======================================================== -->
+  <script>
+    // 1. Single Page Application (SPA) Routing Engine
+    function switchPage(pageId) {
+      // Hide all pages
+      const pages = ['landing', 'campaigns', 'calculator', 'resources'];
+      pages.forEach(p => {
+        const el = document.getElementById(`view-${p}`);
+        const navEl = document.getElementById(`nav-${p}`);
+        const mobNavEl = document.getElementById(`nav-mobile-${p}`);
+        
+        if (el) el.classList.remove('active');
+        if (navEl) navEl.classList.remove('active');
+        if (mobNavEl) {
+          mobNavEl.classList.remove('bg-[#0F382A]', 'text-white');
+          mobNavEl.classList.add('bg-slate-100', 'text-slate-700');
+        }
+      });
+
+      // Show selected page
+      const targetView = document.getElementById(`view-${pageId}`);
+      const targetNav = document.getElementById(`nav-${pageId}`);
+      const targetMobNav = document.getElementById(`nav-mobile-${pageId}`);
+
+      if (targetView) targetView.classList.add('active');
+      if (targetNav) targetNav.classList.add('active');
+      if (targetMobNav) {
+        targetMobNav.classList.remove('bg-slate-100', 'text-slate-700');
+        targetMobNav.classList.add('bg-[#0F382A]', 'text-white');
+      }
+
+      // Smooth scroll to top of window
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Update URL hash for bookmarking and back button support
+      history.pushState(null, null, `#${pageId}`);
+    }
+
+    // Handle hash on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['landing', 'campaigns', 'calculator', 'resources'].includes(hash)) {
+        switchPage(hash);
+      } else {
+        switchPage('landing');
+      }
+      calculateFootprint();
+    });
+
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash.replace('#', '') || 'landing';
+      switchPage(hash);
+    });
+
+    // 2. Carbon Calculator Interactive Math Engine
+    let currentModeFactor = 0.404; // kg per mile
+    function setCommuteMode(mode, btn) {
+      document.querySelectorAll('#commute-modes button').forEach(b => {
+        b.classList.remove('bg-emerald-50', 'border-emerald-600');
+      });
+      btn.classList.add('bg-emerald-50', 'border-emerald-600');
+
+      if (mode === 'gas') currentModeFactor = 0.404;
+      else if (mode === 'hybrid') currentModeFactor = 0.210;
+      else if (mode === 'ev') currentModeFactor = 0.095;
+      else if (mode === 'transit') currentModeFactor = 0.140;
+      else if (mode === 'bike') currentModeFactor = 0.000;
+
+      calculateFootprint();
+    }
+
+    function changeCounter(id, delta) {
+      const el = document.getElementById(id);
+      let val = parseInt(el.innerText) + delta;
+      if (val < 0) val = 0;
+      el.innerText = val;
+      calculateFootprint();
+    }
+
+    function calculateFootprint() {
+      const slider = document.getElementById('commute-miles-slider');
+      const milesDisplay = document.getElementById('commute-miles-display');
+      if (!slider) return;
+
+      const miles = parseInt(slider.value);
+      milesDisplay.innerText = miles.toLocaleString() + ' miles/yr';
+
+      const shortFlights = parseInt(document.getElementById('short-flights').innerText);
+      const longFlights = parseInt(document.getElementById('long-flights').innerText);
+
+      // Calculations in Metric Tons
+      const mobilityEmissions = ((miles * currentModeFactor) / 1000) + (shortFlights * 0.25) + (longFlights * 1.20);
+      const homeEmissions = 2.4; // Fixed average for demo
+      const foodEmissions = 1.9;
+      const goodsEmissions = 0.9;
+
+      const total = (mobilityEmissions + homeEmissions + foodEmissions + goodsEmissions).toFixed(1);
+
+      document.getElementById('total-footprint').innerText = total;
+      document.getElementById('footprint-indicator').innerText = total + ' t';
+      document.getElementById('breakdown-mobility').innerText = mobilityEmissions.toFixed(1) + ' t';
+
+      // Bar width percentage relative to 20t scale
+      const barPct = Math.min(100, Math.max(5, (total / 20) * 100));
+      document.getElementById('footprint-bar').style.width = barPct + '%';
+
+      const diffPct = Math.round(((14.7 - total) / 14.7) * 100);
+      const compText = document.getElementById('comparison-text');
+      if (diffPct > 0) {
+        compText.innerText = `You are ${diffPct}% lower than the national average!`;
+      } else {
+        compText.innerText = `You are ${Math.abs(diffPct)}% higher than the national average.`;
+      }
+    }
+
+    // 3. Petition Signature Submission Handler
+    let currentSignatures = 184320;
+    function handlePetitionSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('signer-name').value;
+      currentSignatures += 1;
+      
+      const successEl = document.getElementById('petition-success');
+      successEl.innerHTML = `🎉 Thank you, <strong>${name}</strong>! Your verified signature #TP-${currentSignatures} was recorded and sent to the public docket.`;
+      successEl.classList.remove('hidden');
+
+      // Add to ticker
+      const ticker = document.getElementById('signatures-ticker');
+      const newEntry = document.createElement('div');
+      newEntry.className = 'flex justify-between items-center py-1 border-b border-emerald-100 bg-emerald-50 px-2 rounded';
+      newEntry.innerHTML = `<span class="font-bold text-emerald-800">${name} (Just now)</span><span class="text-emerald-600 text-[10px]">Verified ✓</span>`;
+      ticker.prepend(newEntry);
+
+      document.getElementById('petition-form').reset();
+    }
+
+    // 4. Interactive Volunteer Registration
+    function registerEvent(eventName) {
+      const email = prompt(`Register for "${eventName}":\nPlease enter your email address for meeting coordinates:`);
+      if (email && email.includes('@')) {
+        alert(`Success! We have sent field gear preparation instructions and waiver details to ${email}. Thank you for taking action!`);
+      }
+    }
+
+    // 5. Download Simulations
+    function downloadAuditReport() {
+      alert("Generating TerraPulse Verified Carbon Audit PDF...\nDownload initiated: TerraPulse-Audit-2026.pdf");
+    }
+
+    function triggerDownload(itemTitle) {
+      alert(`Downloading "${itemTitle}" (Open Access Creative Commons 4.0)\nFile dispatched to your downloads folder.`);
+    }
+
+    // 6. Upvote Threads
+    function upvoteThread(elementId) {
+      const el = document.getElementById(elementId);
+      let count = parseInt(el.innerText);
+      el.innerText = count + 1;
+      el.parentElement.classList.add('bg-emerald-200', 'text-emerald-950');
+    }
+
+    function openNewDiscussionModal() {
+      const title = prompt("Start a New Field Discussion:\nEnter the topic title or question:");
+      if (title) {
+        alert(`Discussion "${title}" submitted to the moderation queue! Once verified against IPCC AR6 thresholds, it will appear in the feed.`);
+      }
+    }
+
+    // 7. Search & Topic Filters
+    function setSearch(topic) {
+      document.getElementById('resource-search').value = topic;
+      filterResources();
+    }
+
+    function filterResources() {
+      const val = document.getElementById('resource-search').value;
+      alert(`Searching peer-reviewed knowledge commons for "${val}"... 4 match guides found.`);
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      alert("Subscribed! You will receive our weekly peer-reviewed climate intelligence digest.");
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
